@@ -10,7 +10,7 @@ load_dotenv()
 
 app = Flask(__name__)
 # Usar la variable de entorno MONGO_URI
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.config['MONGO_URI'] = 'mongodb+srv://gonzalezcontrerasnelson:12345@cluster0.hehrw.mongodb.net/pythonreactdb?retryWrites=true&w=majority'
 
 
 mongo = PyMongo(app)
