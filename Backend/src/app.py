@@ -1,9 +1,18 @@
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo, ObjectId
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
+
+# Cargar las variables de entorno desde el archivo .env
+load_dotenv()
 
 app = Flask(__name__)
-app.config['MONGO_URI']='mongodb://localhost/pythonreactdb'
+# Usar la variable de entorno MONGO_URI
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+
+
 mongo = PyMongo(app)
 CORS(app)
 db = mongo.db.users
@@ -60,4 +69,5 @@ def updateUser(id):
     return jsonify({'message': 'User Updated'})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
